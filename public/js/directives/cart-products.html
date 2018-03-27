@@ -1,0 +1,35 @@
+<aside id="cartModal">
+
+    <a href="" id="closeCart" title="Esconder carrinho" ng-click="closeCartBox()">Fechar [x]</a>
+    <div id="cartInfo">
+        <span>{{cartlist.length}}</span>
+        <p>Sacola</p>
+    </div>
+
+    <div id="allCartProducts">
+
+        <div class="itemCart" ng-repeat="cartproduct in cartlist" id="cartProd{{cartproduct.id}}">
+            <div class="imgThumb"><img src="images/{{cartproduct.sku}}.jpg"></div>
+            <div class="boxCenter">
+                <h3 class="titProdCart">{{cartproduct.title}} {{cartproduct.description}}</h3>
+                <p class="otherInfo"><span class="avaiableSizes" ng-repeat="size in cartproduct.availableSizes">{{size}} </span> | {{cartproduct.style}}</p>
+                <p class="otherInfo">Quantidade: <span class="qntdProd">1</span></p>
+            </div>
+            <a href="" class="delItem" title="Remover do carrinho" ng-click="removeFromCart($index); fadeOutItem(cartproduct.id);" ng-mouseover="hoverMask(true, cartproduct.id)" ng-mouseleave="hoverMask(false, cartproduct.id)">X</a>
+            <span class="priceCart">{{cartproduct.currencyFormat}} <strong class="priceProductCart">{{cartproduct.price | currency : "" : 2}}</strong></span>
+        </div>
+
+    </div>
+
+    <p class="msgCart" ng-show="cartlist.length == 0">Seu carrinho está vazio.</p>
+
+    <div ng-hide="cartlist.length == 0">
+        <p class="subTotal">Subtotal:</p>
+        <div id="totalPrice">
+            <span>R$ <strong id="finalPrice">{{ getTotal() | currency : "" : 2 }}</strong></span>
+            <p>Ou em 10x de R$ {{getTotal()/10 | currency : "" : 2}}</p>
+        </div>
+        <button id="buy" title="Finalizar compra">Comprar</button>
+    </div>
+
+</aside>

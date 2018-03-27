@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="frontendtest">
+<head>
+	<meta charset="UTF-8">
+	<title>NS Front End Test</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body ng-controller="ProductsController" ng-init="verifyCookie()">
+
+	<h1>Vitrine</h1>
+
+	<section id="allProducts">	
+
+		<article class="product" ng-repeat="product in products" ng-init="qntd = 0">
+			<a href="" title="Adicionar ao carrinho" ng-click="qntd=qntd+1; addToCart(product, qntd); openCartModal();">
+				<div class="imgProduct"><img src="images/{{product.sku}}.jpg" alt="{{product.title}}"></div>
+				<h2>{{product.title}} {{product.description}}</h2>
+				<span class="line"></span>
+				<div class="boxPrice">
+					<span class="price">{{product.currencyFormat}} <span class="priceValue"><strong>{{product.price | currency : "" : 2}}</strong></span></span>
+					<span class="payment">ou 3 x {{product.currencyFormat}} <span class="subValue">{{product.price/3 | currency : "" : 2}}</span></span>
+				</div>
+			</a>
+		</article>
+
+	</section>
+
+
+	<cart-products></cart-products>
+
+
+<script src="js/lib/jquery-3.3.1.min.js"></script>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/angular-local-storage.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/controllers/produtos-controller.js"></script>
+<script src="js/directives/cart-directive.js"></script>
+
+
+</body>
+</html>
